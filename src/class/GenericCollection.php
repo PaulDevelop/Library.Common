@@ -206,14 +206,5 @@ abstract class GenericCollection extends Base implements \IteratorAggregate, \ar
     {
         return count($this->collection);
     }
-//    protected function _getType()
-//    {
-//        return $this->type;
-//    }
-//
-//    protected function _getIsClass()
-//    {
-//        return $this->isClass;
-//    }
     #endregion
 }
