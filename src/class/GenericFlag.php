@@ -28,10 +28,10 @@ abstract class GenericFlag
     #endregion
 
     #region methods
-    function addFlag($flag)
+    public function addFlag($flag)
     {
         // check, if flag value is valid
-        $class = new \ReflectionClass ($this->type);
+        $class = new \ReflectionClass($this->type);
         $constants = $class->getConstants();
         $foundValue = false;
         foreach ($constants as $value) {
@@ -47,12 +47,12 @@ abstract class GenericFlag
         $this->flags |= $flag;
     }
 
-    function removeFlag($flag)
+    public function removeFlag($flag)
     {
         $this->flags &= ~$flag;
     }
 
-    function check($flag)
+    public function check($flag)
     {
         if ($this->flags & $flag) {
             return true;
