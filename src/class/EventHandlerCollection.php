@@ -16,6 +16,6 @@ class EventHandlerCollection extends GenericCollection
 {
     public function __construct()
     {
-        parent::__construct('\Com\PaulDevelop\Library\EventHandler');
+        parent::__construct('\Com\PaulDevelop\Library\Common\EventHandler');
     }
 }
