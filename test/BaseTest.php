@@ -1,8 +1,8 @@
 <?php
 
-namespace Com\PaulDevelop\Library;
+namespace Com\PaulDevelop\Library\Common;
 
-class BaseObject extends Common\Base
+class BaseObject extends Base
 {
     private $_value = 'property value';
 
