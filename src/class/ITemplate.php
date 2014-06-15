@@ -16,4 +16,6 @@ interface ITemplate
      * @return string
      */
     public function process();
+
+    public function setTemplateFileName($templateFileName = '');
 }
