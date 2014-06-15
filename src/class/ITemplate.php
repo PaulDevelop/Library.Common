@@ -9,6 +9,8 @@ namespace Com\PaulDevelop\Library\Common;
  * @category Common
  * @author   Rüdiger Scheumann <code@pauldevelop.com>
  * @license  http://opensource.org/licenses/MIT MIT
+ *
+ * @property string $TemplateFileName
  */
 interface ITemplate
 {
