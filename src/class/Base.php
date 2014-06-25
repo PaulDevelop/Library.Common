@@ -59,9 +59,25 @@ abstract class Base
     /**
      * @return \stdClass
      */
-    public function getStdClass() {
+    public function getStdClass()
+    {
         // init
         $result = new \stdClass();
+
+        // action
+        $rc = new \ReflectionClass(get_class($this));
+        $methods = $rc->getMethods(\ReflectionMethod::IS_PROTECTED | \ReflectionMethod::IS_PUBLIC);
+        foreach ($methods as $method) {
+            if (preg_match('/^get(.*)$/', $method->name, $matches)) {
+                if ($rc->hasProperty(lcfirst($matches[1]))) {
+                    if (is_object($this->{$matches[1]})) {
+                        $result->{lcfirst($matches[1])} = $this->{$matches[1]}->getStdClass();
+                    } else {
+                        $result->{lcfirst($matches[1])} = $this->{$matches[1]};
+                    }
+                }
+            }
+        }
 
         // return
         return $result;
