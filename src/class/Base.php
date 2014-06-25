@@ -55,4 +55,15 @@ abstract class Base
             throw new NonExistingPropertyException("Property \"".$propertyName."\" does not exist.");
         }
     }
+
+    /**
+     * @return \stdClass
+     */
+    public function getStdClass() {
+        // init
+        $result = new \stdClass();
+
+        // return
+        return $result;
+    }
 }
