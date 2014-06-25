@@ -204,9 +204,11 @@ abstract class GenericCollection extends Base implements \IteratorAggregate, \ar
 
         // action
         $result->collection = array();
-        foreach ($this->collection as $item) {
+        foreach ($this->collection as $key => $item) {
             if (is_a($item, '\Com\PaulDevelop\Library\Common\Base')) {
+                /** @var Base $item */
                 array_push($result->collection, $item->getStdClass());
+                $result->$key = $item->getStdClass();
             }
         }
 

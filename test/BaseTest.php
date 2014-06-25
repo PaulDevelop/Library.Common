@@ -156,6 +156,9 @@ class BaseTest extends \PHPUnit_Framework_TestCase
         $assertObj->nodeCollection->collection[0] = new \stdClass();
         $assertObj->nodeCollection->collection[0]->parentNode = null;
         $assertObj->nodeCollection->collection[0]->nodes = null;
+        $assertObj->nodeCollection->test = new \stdClass();
+        $assertObj->nodeCollection->test->parentNode = null;
+        $assertObj->nodeCollection->test->nodes = null;
         $this->assertEquals($assertObj, $fooObj->getStdClass());
     }
 }
