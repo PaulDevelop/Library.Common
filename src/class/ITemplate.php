@@ -20,4 +20,6 @@ interface ITemplate
     public function process();
 
     public function setTemplateFileName($templateFileName = '');
+
+    public function bindVariable($variableName = '', $content = null);
 }
