@@ -22,4 +22,6 @@ interface ITemplate
     public function setTemplateFileName($templateFileName = '');
 
     public function bindVariable($variableName = '', $content = null);
+
+    public function registerCallback($name = '', $object = null, $function = '');
 }
