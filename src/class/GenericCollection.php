@@ -41,12 +41,11 @@ abstract class GenericCollection extends Base implements \IteratorAggregate, \ar
      * Constructor.
      *
      * @param string $type
+     * @param array  $initialValues
      *
      * @throws \Exception
-     *
-     * @return GenericCollection
      */
-    public function __construct($type = 'unknown type')
+    public function __construct($type = 'unknown type', $initialValues = array(), $keyFieldName = '')
     {
         $this->collection = array();
         $this->type = $type;
@@ -65,10 +64,35 @@ abstract class GenericCollection extends Base implements \IteratorAggregate, \ar
             && $type != 'string'
             && $type != 'array') ? true : false;
         //$this->isClass = is_object($)
+
+        if (sizeof($initialValues) > 0) {
+            foreach ($initialValues as $initialValue) {
+                $key = $this->tryToFindKey($initialValue, $keyFieldName);
+                $this->add($initialValue, $key);
+            }
+        }
     }
     #endregion
 
     #region methods
+    private function tryToFindKey($value = null, $keyFieldName = '')
+    {
+        // init
+        $result = '';
+
+        // action
+        if (is_array($value) && array_key_exists($keyFieldName, $value)) {
+            $result = $value[$keyFieldName];
+        } else {
+            if (is_object($value) && isset($value->{$keyFieldName})) {
+                $result = $value->{$keyFieldName};
+            }
+        }
+
+        // return
+        return $result;
+    }
+
     /**
      * Add value to collection.
      *
@@ -78,8 +102,11 @@ abstract class GenericCollection extends Base implements \IteratorAggregate, \ar
      * @throws TypeCheckException
      * @throws ArgumentException
      */
-    public function add($value = null, $key = '')
-    {
+    public
+    function add(
+        $value = null,
+        $key = ''
+    ) {
         //var_dump($this->type);
         //var_dump($value);
         //var_dump(is_object($value));
@@ -145,12 +172,14 @@ abstract class GenericCollection extends Base implements \IteratorAggregate, \ar
 //        }
 //    }
 
-    public function clear()
+    public
+    function clear()
     {
         $this->collection = array();
     }
 
-    public function getIterator()
+    public
+    function getIterator()
     {
         return new \ArrayIterator($this->collection);
     }
@@ -159,8 +188,11 @@ abstract class GenericCollection extends Base implements \IteratorAggregate, \ar
      * @param mixed $offset
      * @param mixed $value
      */
-    public function offsetSet($offset = null, $value = null)
-    {
+    public
+    function offsetSet(
+        $offset = null,
+        $value = null
+    ) {
         $this->collection[$offset] = $value;
     }
 
@@ -169,16 +201,20 @@ abstract class GenericCollection extends Base implements \IteratorAggregate, \ar
      *
      * @return bool
      */
-    public function offsetExists($offset = null)
-    {
+    public
+    function offsetExists(
+        $offset = null
+    ) {
         return isset($this->collection[$offset]);
     }
 
     /**
      * @param mixed $offset
      */
-    public function offsetUnset($offset = null)
-    {
+    public
+    function offsetUnset(
+        $offset = null
+    ) {
         unset($this->collection[$offset]);
     }
 
@@ -187,17 +223,21 @@ abstract class GenericCollection extends Base implements \IteratorAggregate, \ar
      *
      * @return mixed|null
      */
-    public function offsetGet($offset = null)
-    {
+    public
+    function offsetGet(
+        $offset = null
+    ) {
         return isset($this->collection[$offset]) ? $this->collection[$offset] : null;
     }
 
-    public function count()
+    public
+    function count()
     {
         return count($this->collection);
     }
 
-    public function getStdClass()
+    public
+    function getStdClass()
     {
         // init
         $result = new \stdClass();
@@ -215,15 +255,17 @@ abstract class GenericCollection extends Base implements \IteratorAggregate, \ar
         // return
         return $result;
     }
-    #endregion
 
-    #region properties
+#endregion
+
+#region properties
     /**
      * @return int
      */
-    public function getCount()
+    public
+    function getCount()
     {
         return count($this->collection);
     }
-    #endregion
+#endregion
 }
