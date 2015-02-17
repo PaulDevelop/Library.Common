@@ -67,8 +67,8 @@ abstract class GenericCollection extends Base implements \IteratorAggregate, \ar
 
         if (sizeof($initialValues) > 0) {
             foreach ($initialValues as $initialValue) {
-                $key = $this->tryToFindKey($initialValue, $keyFieldName);
-                $this->add($initialValue, $key);
+                //$key = $this->tryToFindKey($initialValue, $keyFieldName);
+                $this->add($initialValue, $keyFieldName); // $key
             }
         }
     }
