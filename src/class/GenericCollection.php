@@ -67,8 +67,9 @@ abstract class GenericCollection extends Base implements \IteratorAggregate, \ar
 
         if (sizeof($initialValues) > 0) {
             foreach ($initialValues as $initialValue) {
-                //$key = $this->tryToFindKey($initialValue, $keyFieldName);
-                $this->add($initialValue, $keyFieldName); // $key
+                //$this->add($initialValue, $keyFieldName);
+                $key = $this->tryToFindKey($initialValue, $keyFieldName);
+                $this->add($initialValue, $key);
             }
         }
     }
@@ -84,8 +85,15 @@ abstract class GenericCollection extends Base implements \IteratorAggregate, \ar
         if (is_array($value) && array_key_exists($keyFieldName, $value)) {
             $result = $value[$keyFieldName];
         } else {
-            if (is_object($value) && isset($value->{$keyFieldName})) {
-                $result = $value->{$keyFieldName};
+            //if (is_object($value) && isset($value->{$keyFieldName})) {
+            //    $result = $value->{$keyFieldName};
+            //}
+            if (is_object($value)) {
+                try {
+                    $result = $value->{$keyFieldName};
+                } catch (NonExistingPropertyException $nepe) {
+
+                }
             }
         }
 
