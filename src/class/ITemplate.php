@@ -23,5 +23,7 @@ interface ITemplate
 
     public function bindVariable($variableName = '', $content = null);
 
+    public function readVariable($variableName = '');
+
     public function registerCallback($name = '', $object = null, $function = '');
 }
