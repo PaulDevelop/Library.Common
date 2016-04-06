@@ -21,7 +21,7 @@ interface ITemplate
 
     public function setTemplateFileName($templateFileName = '');
 
-    public function bindVariable($variableName = '', $content = null);
+    public function bindVariable($variableName = '', $content = null, $force = false);
 
     public function readVariable($variableName = '');
 
